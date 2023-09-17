@@ -24,7 +24,7 @@ app.get('/api/city/:city', async (req, res) => {
         const response = { cityInfo, jobs }
 
         if (cityInfo || jobs) {
-            res.status(200).json({ cityInfo, jobs })
+            res.status(200).json(response)
         } else {
 
             res.status(404).json({ error: 'City or job not found' })
@@ -32,7 +32,7 @@ app.get('/api/city/:city', async (req, res) => {
 
 
     } catch (err) {
-        console.log(err)
+        console.log(res.status(404).json({ error: 'City or job not found' }))
     }
 
 
