@@ -15,16 +15,16 @@ app.use(express.static('public'))
 // the endpoint should return a 404 status
 
 app.get('/api/city/:city', async (req, res) => {
-    const cityData = await req.params.city
+    let cityData = await req.params.city
 
     try {
 
         let cityInfo = await getCityInfo(cityData)
-        let jobs = getJobs(cityData)
+        let jobs = await getJobs(cityData)
         const response = { cityInfo, jobs }
 
         if (cityInfo || jobs) {
-            res.status(200).json(response)
+            res.status(200).json({ cityInfo, jobs })
         } else {
 
             res.status(404).json({ error: 'City or job not found' })
